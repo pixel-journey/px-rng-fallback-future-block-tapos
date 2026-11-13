@@ -1,19 +1,32 @@
-# Delayed future-block seed (TAPOS-style fallback)
+# Delayed future-block entropy (TAPOS-style fallback)
 
-> **Domain:** RNG fallback — delayed block seed  
+> **Domain:** RNG fallback — not synchronous  
 > **Sources:** [SOURCES.md](SOURCES.md)  
 > **Catalog:** [px-contract-examples-vault](https://github.com/pixel-journey/px-contract-examples-vault)  
 > **Path:** [ORNG-LEARNING-PATH.md](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/ORNG-LEARNING-PATH.md)
 
-**Goal:** Open a job at `openBlock` with a client memo seed. Resolve is refused until `openBlock + delayBlocks`. Digest = `sha256(blockId || memoSeed)`. Past `expireAt` the job expires without a digest.
+**Goal:** Entropy is fixed only after a later block: open with memo seed, resolve after delay, expire after window. Prefer [orng.wax](https://github.com/worldwide-asset-exchange/wax-orng) on WAX.
 
-**Code under test:** `npm test` (unit + multi-job composition). Block ids here are lab stand-ins, not live chain TAPOS. No wasm.
+**Code under test:** `npm test` (unit + multi-job composition). Synthetic block ids in tests — no live chain.
 
-Prefer [orng.wax](https://github.com/worldwide-asset-exchange/wax-orng) for production randomness. This is a teaching fallback. Sibling: [commit-reveal](https://github.com/pixel-journey/px-rng-fallback-commit-reveal).
+## Learning materials
 
-## Composition
+| Doc | Role |
+| --- | --- |
+| [EDUCATION.md](EDUCATION.md) | Beginner → masterclass |
+| [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md) | Ready, resolve, expire |
+| [TIPS.md](TIPS.md) | Prefer oracle |
+| [SECURITY.md](SECURITY.md) | Timing threats |
+| [SOURCES.md](SOURCES.md) | Official + related |
 
-`tapos.composition.test.ts` walks open → too-early → ready → resolve → double-resolve refuse. Two jobs with different memo seeds get different digests on the same block id. Expire never produces a digest. Resolving job A leaves job B open.
+## What is true (executed)
+
+| Rule | Result |
+| --- | --- |
+| Before resolveAfter | too early |
+| Within window | digest from block id + memo |
+| Past expireAt | expired |
+| Second resolve | refused |
 
 ```bash
 npm test

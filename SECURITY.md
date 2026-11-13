@@ -1,10 +1,10 @@
-# Security
+# Security notes — TAPOS delay
 
-| Surface | Closed by |
+| Mitigated | Behavior |
 | --- | --- |
-| Resolve before delay | too early |
-| Past window | expired |
-| Second resolve | already resolved |
-| Short / non-hex memo | refused |
+| Too early resolve | refused |
+| Expired | expire path / refuse resolve |
+| Double resolve | refused |
+| Bad memo / delay bounds | refused |
 
-Not claimed: live TAPOS / block id reads, producer-bias resistance, wasm.
+Production threat model: producer influence, timing, and user grief on windows. Prefer oracle on WAX.
