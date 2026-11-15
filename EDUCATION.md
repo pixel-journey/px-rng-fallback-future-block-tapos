@@ -1,31 +1,27 @@
-# Education — future-block TAPOS fallback
-
-> **Rung:** `npm test` passes. **Not** a synchronous RNG. Prefer [orng.wax](https://github.com/worldwide-asset-exchange/wax-orng) on WAX.
-
-## What you should be able to do
-
-| Level | Skill |
-| --- | --- |
-| Beginner | Entropy only after `openBlock + delay` |
-| Intermediate | Resolve window then expire |
-| Masterclass | Why producers can influence future block ids; why oracles win on WAX |
+# Education — delay until a future block
 
 ## Beginner
 
-Open a job with a **memo seed**. Resolution is illegal until `currentBlock >= resolveAfter`. Digest mixes a **future** block id with the seed (`mixDigest`).
+A bet opens at block N and may only resolve at or after N + delay. The entropy is mixed from that future block id and a memo seed. If the window passes, the job expires without a digest.
 
 ## Intermediate
 
-Phases: `open` → `ready` / `resolved` / `expired`. After `expireAt`, resolve becomes expire. Second resolve refused.
+| Field | Meaning |
+| --- | --- |
+| `resolveAfter` | first legal block |
+| `expireAt` | `resolveAfter + windowBlocks` in this lab |
+| `mixDigest` | deterministic mix of block id and memo seed |
 
-Composition: multi-job independent delay lifecycle.
+`markReady` is optional bookkeeping; `resolve` enforces the same early bound.
 
-## Masterclass
+## Masterclass (not in this repo)
 
-- Block producers and timing games can bias who resolves when.
-- This lab uses a **synthetic** `blockIdHex` for tests — not live TAPOS fields.
-- Production on WAX should use orng.wax unless you are on a chain without an oracle and accept the threat model.
+- Reading a real block id via TAPOS / host API.
+- Paying a game from `uint32FromDigest`.
+- What happens if producers can grind the block id (trust model).
 
-## Will not teach
+## Outcomes
 
-Live chain id / ref_block_prefix extraction, or that this is safe for high-value WAX mainnet games.
+1. Compute `resolveAfter` and `expireAt` from open, delay, window.
+2. Show double resolve is refused.
+3. Show two memos on one block id produce different digests.

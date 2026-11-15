@@ -1,30 +1,36 @@
-# Worked examples — TAPOS delay job
+# Worked examples — future-block TAPOS digest
 
-## Example A — open and wait
+`SEED = aabbccdd11223344`. Open at block 1000, delay 3 → `resolveAfter = 1003`, `expireAt = 1013` when `windowBlocks = 10`.
 
-```text
-job = openJob({ id: 1, player: "alice", openBlock: 100, delayBlocks: 10, memoSeed: "aabbccdd" })
-// resolveAfter = 110, expireAt = 142 (default window 32)
-markReady(job, 105) → too early
-markReady(job, 110) → ready
-```
+## Timeline
 
-## Example B — resolve with digest
+| Current block | Action | Result |
+| --- | --- | --- |
+| 1001 | `resolve` | too early |
+| 1002 | `markReady` (delay 3 job) | too early |
+| 1003 | `markReady` | phase `ready` |
+| 1003 | `resolve` with `blockIdHex(1003)` | phase `resolved`, digest = `mixDigest(blockId, SEED)` |
+| 1004 | second `resolve` | already resolved |
+| expireAt + 1 | `resolve` without prior success | phase `expired`, digest `null` |
+| later | `resolve` on expired | reason `expired` |
 
-```text
-blockId = blockIdHex(110)  // synthetic in tests
-resolve(job, { currentBlock: 110, blockId }) → phase resolved, digest set
-uint32FromDigest(digest)  // first 4 bytes as uint32
-```
+Digest length is 64 hex. Same block id + seed is stable; different seed differs.
 
-## Example C — expire
+## Two jobs, same block
 
-`currentBlock > expireAt` → phase `expired`; resolve after that refused.
+Alice seed A, Bob seed B, same `resolveAfter`. Same `blockId` yields **two different digests** (`mixDigest(id, A)` vs `mixDigest(id, B)`).
 
-## Example D — already resolved
+Resolving job A does not move job B. If B still has a longer delay, resolve on A's block is `too early` for B.
 
-Second resolve → `already resolved`.
+## uint32
 
-## Example E — composition
+Digest prefix `0000002a` → `uint32FromDigest` is `0x2a`.
 
-Two jobs with different delays resolve independently (composition test).
+## Refusals
+
+| Case | Error |
+| --- | --- |
+| `delayBlocks` 0 | bad delay |
+| memo `zz` | bad memo |
+
+No live block id from the chain. `blockIdHex` is a stand-in for tests.

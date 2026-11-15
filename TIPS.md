@@ -1,8 +1,6 @@
-# Tips — delay RNG
+# Tips
 
-- Prefer [orng.wax](https://github.com/worldwide-asset-exchange/wax-orng) on WAX.
-- Sibling bond model: [commit-reveal](https://github.com/pixel-journey/px-rng-fallback-commit-reveal).
-- Cap delay and window; document expire refunds.
-- Never treat this lab’s `blockIdHex` as a mainnet block id source.
-
-Path: [ORNG-LEARNING-PATH](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/ORNG-LEARNING-PATH.md) step 6.
+- Delay must be at least 1. Zero is refused so "next block" is explicit.
+- Expire without a digest — do not invent entropy after the window.
+- Memo seed is part of the mix so two players at the same block do not share an outcome.
+- This is a fallback lab. Prefer `orng.wax` when credits and latency allow.
