@@ -1,5 +1,11 @@
-# Security
+# Security — TAPOS fallback
 
-Closed: early resolve, double resolve, expired path, bad delay, bad memo, independent jobs.
+## Closed in tests
 
-Not closed: block ids are synthetic; no proof a caller supplied the real head block; no producer-grinding model; no token payout.
+Too early resolve/ready; expire; second resolve; bad delay/memo; deterministic digests.
+
+## Not closed
+
+Producer collusion, seed grinding economics, live block id reads, refunds.
+
+Not orng.wax — structural timing only.

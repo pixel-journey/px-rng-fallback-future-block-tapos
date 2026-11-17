@@ -1,11 +1,9 @@
-# Official sources
+# Sources
 
 | Source | Use |
 | --- | --- |
-| [wax-orng](https://github.com/worldwide-asset-exchange/wax-orng) | Preferred WAX RNG |
-| [docs.wax.io](https://docs.wax.io/) | Network docs |
-| [docs.eosnetwork.com](https://docs.eosnetwork.com/) | TAPOS concepts |
+| [docs.wax.io](https://docs.wax.io/) | Blocks, TAPOS concepts |
+| [docs.eosnetwork.com](https://docs.eosnetwork.com/) | Transaction / block headers |
+| [wax-orng](https://github.com/worldwide-asset-exchange/wax-orng) | Preferred alternative |
 
-## Related
-
-[commit-reveal](https://github.com/pixel-journey/px-rng-fallback-commit-reveal) · [ORNG path](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/ORNG-LEARNING-PATH.md)
+Related: [commit-reveal](https://github.com/pixel-journey/px-rng-fallback-commit-reveal) · [drand](https://github.com/pixel-journey/px-rng-fallback-drand-bls-verifier)

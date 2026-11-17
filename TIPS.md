@@ -1,6 +1,17 @@
-# Tips
+# Tips — future-block TAPOS
 
-- Delay must be at least 1. Zero is refused so "next block" is explicit.
-- Expire without a digest — do not invent entropy after the window.
-- Memo seed is part of the mix so two players at the same block do not share an outcome.
-- This is a fallback lab. Prefer `orng.wax` when credits and latency allow.
+## Do
+
+- Enforce delay ≥ 1.  
+- Document expire/refund policy.  
+- Prefer orng when the network has it.
+
+## Don't
+
+- Market TAPOS delay as equivalent to threshold RNG.  
+- Resolve twice.  
+- Accept unstructured memo seeds without length/hex checks.
+
+## Related
+
+[commit-reveal](https://github.com/pixel-journey/px-rng-fallback-commit-reveal) · [drand](https://github.com/pixel-journey/px-rng-fallback-drand-bls-verifier) · [orng dual-callback](https://github.com/pixel-journey/px-orng-dual-callback-idempotent)
