@@ -1,6 +1,6 @@
 # Worked examples — future-block TAPOS
 
-Memo seed `aabbccdd11223344`. Open block **1000**, delay **3** → `resolveAfter` **1003**, `expireAt` **1015** (window 10).
+Memo seed `aabbccdd11223344`. Open block **1000**, delay **3** → `resolveAfter` **1003**, `expireAt` **1015** (window **10**).
 
 ## Timing
 
@@ -9,7 +9,7 @@ Memo seed `aabbccdd11223344`. Open block **1000**, delay **3** → `resolveAfter
 | markReady | 1002 | too early |
 | markReady | 1003 | phase `ready` |
 | resolve | 1001 | too early |
-| resolve | 1003 | phase `resolved`, digest = mix(blockId, seed), length 64 |
+| resolve | 1003 | phase `resolved`, digest = mix(blockId, seed), length **64** |
 | resolve | expireAt+1 | phase `expired` |
 | second resolve | any | already resolved |
 
@@ -17,6 +17,16 @@ Same blockId + seed is deterministic; different seed differs.
 
 `uint32FromDigest("0000002a" + …)` → `0x2a`.
 
-Delay 0 or memo `zz` refused on open.
+## Shape refusals
 
-**Not** a synchronous RNG: the action waits for a future block id. No orng.wax in this lab.
+| Input | Result |
+| --- | --- |
+| delay 0 | refused on open |
+| memo `zz` | refused on open |
+
+## Product facts
+
+- **Not** a synchronous RNG: the action waits for a future block id.
+- No `orng.wax` in this lab.
+- Prefer `orng.wax` on WAX mainnet when available.
+- Expire without resolve needs a product refund policy (not fully modeled here).
