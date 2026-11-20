@@ -35,4 +35,4 @@ A bet commits to a **future** block reference (TAPOS / block id) plus an optiona
 | External time beacon | [drand](https://github.com/pixel-journey/px-rng-fallback-drand-bls-verifier) |
 | Multi-oracle XOR | [quorum](https://github.com/pixel-journey/px-rng-fallback-multi-oracle-quorum) |
 
-Related: [commit-reveal](https://github.com/pixel-journey/px-rng-fallback-commit-reveal) · [drand](https://github.com/pixel-journey/px-rng-fallback-drand-bls-verifier) · [dual-callback](https://github.com/pixel-journey/px-orng-dual-callback-idempotent) · [ORNG path](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/ORNG-LEARNING-PATH.md)
+Related: [commit-reveal](https://github.com/pixel-journey/px-rng-fallback-commit-reveal) · [drand](https://github.com/pixel-journey/px-rng-fallback-drand-bls-verifier) · [dual-callback](https://github.com/pixel-journey/px-orng-dual-callback-idempotent) · `px-contract-examples-vault` (private index; not this public course)

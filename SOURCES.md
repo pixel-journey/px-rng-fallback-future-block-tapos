@@ -24,4 +24,4 @@ Future-block mixing is an **educational fallback**. Block producer influence and
 | [commit-reveal](https://github.com/pixel-journey/px-rng-fallback-commit-reveal) | Bonded house reveal |
 | [drand](https://github.com/pixel-journey/px-rng-fallback-drand-bls-verifier) | Strict post-bet public randomness |
 | [quorum](https://github.com/pixel-journey/px-rng-fallback-multi-oracle-quorum) | M-of-N committee |
-| [ORNG path](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/ORNG-LEARNING-PATH.md) | Full curriculum order |
+| `px-contract-examples-vault` (private index; not this public course) | Full curriculum order |
