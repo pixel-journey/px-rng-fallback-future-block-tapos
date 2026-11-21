@@ -22,11 +22,20 @@
 
 ## Attack angles
 
-1. Resolving on the open block (no delay).
-2. Using a block id already known to the player at open time.
-3. Double resolve after expire without clearing the bet.
-4. Shipping this on WAX mainnet while `orng.wax` is available.
+1. Resolving on the open block (no delay).  
+2. Using a block id already known to the player at open time.  
+3. Double resolve after expire without clearing the bet.  
+4. Shipping this on WAX mainnet while `orng.wax` is available.  
+5. Confusing this with [ORNG dual-callback](https://github.com/pixel-journey/px-orng-dual-callback-idempotent) once-resolve.
 
 ## Honesty limits
 
-Structural timing only. **Not** `orng.wax`. Prefer [wax-orng](https://github.com/worldwide-asset-exchange/wax-orng). Related: [commit-reveal](https://github.com/pixel-journey/px-rng-fallback-commit-reveal) · [drand](https://github.com/pixel-journey/px-rng-fallback-drand-bls-verifier).
+Structural timing only. **Not** `orng.wax`.
+
+| Sibling | Distinction |
+| --- | --- |
+| [commit-reveal](https://github.com/pixel-journey/px-rng-fallback-commit-reveal) | Commit then reveal |
+| [drand BLS](https://github.com/pixel-journey/px-rng-fallback-drand-bls-verifier) | External randomness beacon |
+| [ORNG v3 starter](https://github.com/pixel-journey/px-orng-v3-randnotify-starter) | Preferred WAX path |
+
+Prefer [wax-orng](https://github.com/worldwide-asset-exchange/wax-orng). [RNG tutorial](https://docs.wax.io/build/tutorials/create-wax-rng-smart-contract/rng_sample).
